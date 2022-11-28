@@ -21,7 +21,7 @@
         ]
     },
     "LogAnalyticsResourceGroup": {
-      "value": "lz-ghub-ppe-uks-rg-01"
+      "value": "lz-ghubvse-ppe-uks-rg-01"
     },
     "LogAnaWspName": {
       "value": "law-ppe-eastus23"

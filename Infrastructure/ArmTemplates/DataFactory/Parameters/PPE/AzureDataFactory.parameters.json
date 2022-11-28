@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "dataFactoryName": {
-        "value": "ghub-ppe-uks-adf-01"
+        "value": "ghubvse-ppe-uks-adf-01"
       },
       "location": {
         "value": "uksouth"

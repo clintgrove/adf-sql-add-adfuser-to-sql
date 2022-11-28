@@ -4,7 +4,7 @@
     "parameters": {
       "rgName": {
         "type": "string",
-        "defaultValue": "lz-ghub-test-uks-rg-02"
+        "defaultValue": "lz-ghubvse-test-uks-rg-02"
       },
       "rgLocation": {
         "type": "string",

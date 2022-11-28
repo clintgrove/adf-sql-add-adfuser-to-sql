@@ -5,8 +5,8 @@ variables:
 
   # GHUB lz variables
   SubscriptionIdGHUB: "1943f6e4-c483-433c-a82b-cc02e45ad73c"
-  ResourceGroupNameGHUB: "lz-ghub-${{ lower(variables.Environment) }}-uks-rg-01"
-  DataFactoryNameGHUB: "lz-ghub-${{ lower(variables.Environment) }}-uks-adf-01"
+  ResourceGroupNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
+  DataFactoryNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-adf-01"
   AzureDataFactoryPipelinesArmTemplateParametersGHUBAdf01: "Services/DataAnalytics/ARMTemplateParametersForFactory01${{ variables.Environment }}.json" #this file doesn't exist for dev
 
   # Arm template parameter files
@@ -33,5 +33,5 @@ variables:
   AzureSqlServerDbAddress_facstuff_target: ${{ lower(variables.AzureSqlServerName_23) }}.database.windows.net #comes from the variable above
   DatabaseName_facstuff_target: "dba-facstuff-target"
 
-  # Sql server variable for server ghub
+  # Sql server variable for server ghubvse
   AzureSqlServerName_ghub: "sqlsrv-yqnh5nxtq5rhi-${{ lower(variables.Environment) }}.database.windows.net" 
