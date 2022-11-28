@@ -30,17 +30,17 @@ jobs:
               SQLBuildSourceFolder: ${{ variables.SQLBuildSourceFolder_dbLida }}
               ArtifactName: 'dropDacpacDATransactions'
           
-          # dfac source build
-          - template: ..\Tasks\Task-BuildAzureSqlDb.yml
-            parameters:
-              SQLBuildSourceFolder: ${{ variables.SQLBuildSourceFolder_dbfacStuffSource }}
-              ArtifactName: 'dropDacpacFACSOURCE'
+          # # dfac source build
+          # - template: ..\Tasks\Task-BuildAzureSqlDb.yml
+          #   parameters:
+          #     SQLBuildSourceFolder: ${{ variables.SQLBuildSourceFolder_dbfacStuffSource }}
+          #     ArtifactName: 'dropDacpacFACSOURCE'
           
-          # dfac target build
-          - template: ..\Tasks\Task-BuildAzureSqlDb.yml
-            parameters:
-              SQLBuildSourceFolder: ${{ variables.SQLBuildSourceFolder_dbfacStuffTarget }}
-              ArtifactName: 'dropDacpacFACTARGET'
+          # # dfac target build
+          # - template: ..\Tasks\Task-BuildAzureSqlDb.yml
+          #   parameters:
+          #     SQLBuildSourceFolder: ${{ variables.SQLBuildSourceFolder_dbfacStuffTarget }}
+          #     ArtifactName: 'dropDacpacFACTARGET'
 
         # Build Data Factory ADF01
         - ${{ if eq(parameters.FeatureFlag_ADF_DeployPipelines, true) }}:

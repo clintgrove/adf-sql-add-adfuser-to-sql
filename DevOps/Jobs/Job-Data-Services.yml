@@ -50,23 +50,23 @@ jobs:
 
               ServiceConnection: ${{ parameters.ServiceConnection }}
 
-          #dfac source database
-          - template: ../Tasks/Task-DeployAzureSqlDb.yml
-            parameters:
-              DacpacFilePath: '$(Pipeline.Workspace)/dropDacpacFACSOURCE/dafacstuffuks-source.dacpac'
-              DatabaseName: ${{ variables.DatabaseName_facstuff_source }}
-              AdditionalArguments: /p:BlockOnPossibleDataLoss=${{ lower(parameters.FeatureFlag_SQL_StopIfDataLossCanOccur) }}
-              ServerName: ${{ variables.AzureSqlServerName_ghub }}
-              ServiceConnection: ${{ parameters.ServiceConnection }}
+          # #dfac source database
+          # - template: ../Tasks/Task-DeployAzureSqlDb.yml
+          #   parameters:
+          #     DacpacFilePath: '$(Pipeline.Workspace)/dropDacpacFACSOURCE/dafacstuffuks-source.dacpac'
+          #     DatabaseName: ${{ variables.DatabaseName_facstuff_source }}
+          #     AdditionalArguments: /p:BlockOnPossibleDataLoss=${{ lower(parameters.FeatureFlag_SQL_StopIfDataLossCanOccur) }}
+          #     ServerName: ${{ variables.AzureSqlServerName_ghub }}
+          #     ServiceConnection: ${{ parameters.ServiceConnection }}
           
-          #dfac target database
-          - template: ../Tasks/Task-DeployAzureSqlDb.yml
-            parameters:
-              DacpacFilePath: '$(Pipeline.Workspace)/dropDacpacFACTARGET/dafacstuffuks-target.dacpac'
-              DatabaseName: ${{ variables.DatabaseName_facstuff_target }}
-              AdditionalArguments: /p:BlockOnPossibleDataLoss=${{ lower(parameters.FeatureFlag_SQL_StopIfDataLossCanOccur) }}
-              ServerName: ${{ variables.AzureSqlServerName_ghub }}
-              ServiceConnection: ${{ parameters.ServiceConnection }}
+          # #dfac target database
+          # - template: ../Tasks/Task-DeployAzureSqlDb.yml
+          #   parameters:
+          #     DacpacFilePath: '$(Pipeline.Workspace)/dropDacpacFACTARGET/dafacstuffuks-target.dacpac'
+          #     DatabaseName: ${{ variables.DatabaseName_facstuff_target }}
+          #     AdditionalArguments: /p:BlockOnPossibleDataLoss=${{ lower(parameters.FeatureFlag_SQL_StopIfDataLossCanOccur) }}
+          #     ServerName: ${{ variables.AzureSqlServerName_ghub }}
+          #     ServiceConnection: ${{ parameters.ServiceConnection }}
 
 
         # Stop ADF 01 triggers
