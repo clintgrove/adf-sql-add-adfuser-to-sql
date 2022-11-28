@@ -44,6 +44,8 @@ jobs:
               DatabaseName: ${{ variables.DADatabaseName }}
               AdditionalArguments: /p:BlockOnPossibleDataLoss=${{ lower(parameters.FeatureFlag_SQL_StopIfDataLossCanOccur) }}
               ServerName: ${{ variables.AzureSqlServerName_ghub }}
+#                    "defaultValue": "[concat('sqlsrv-',uniqueString('sqlsrv-',resourceGroup().location,'-', resourceGroup().id),'-test')]",
+
               ServiceConnection: ${{ parameters.ServiceConnection }}
 
           #dfac source database

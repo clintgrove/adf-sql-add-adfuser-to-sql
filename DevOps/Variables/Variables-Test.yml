@@ -16,7 +16,7 @@ variables:
   AzureLogAnalyticsParameters: "ArmTemplates/LogAnalytics/Parameters/${{ upper(variables.Environment) }}/LogAnalytics.parameters.json"
 
  # Sql server variable for server 23
-  AzureSqlServerName_23: "lz-cgr-${{ lower(variables.Environment) }}-uks-sqldb-23" 
+ # AzureSqlServerName_23: "lz-cgr-${{ lower(variables.Environment) }}-uks-sqldb-23" 
  
   # DATransactions vars
   SQLBuildSourceFolder_dbLida: "SQL DBs/DatabaseLIDA"
@@ -34,4 +34,4 @@ variables:
   DatabaseName_facstuff_target: "dba-facstuff-target"
 
   # Sql server variable for server ghubvse
-  AzureSqlServerName_ghub: "sqlsrv-yqnh5nxtq5rhi-${{ lower(variables.Environment) }}.database.windows.net" 
+  AzureSqlServerName_ghub: "sqlsrv-dwlxwvlfrsgym-${{ lower(variables.Environment) }}.database.windows.net" 
