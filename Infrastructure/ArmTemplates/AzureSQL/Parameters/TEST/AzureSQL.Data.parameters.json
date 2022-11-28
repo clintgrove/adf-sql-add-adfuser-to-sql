@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "administratorLogin": {
+        "value": "sqladmin"
+      },
+      "administratorLoginPassword": {
+
+        "value": "$(SqlPassword)"
+
+      },
+      "databases": {
+          "value": [
+              {
+                  "name": "dba-fac-stf-source"
+              },
+              {
+                "name": "dba-facstuff-target"
+            },
+            {
+              "name": "DATransactions"
+          }
+          ]
+      },
+      "LogAnalyticsResourceGroup": {
+        "value": "lz-ghub-test-uks-rg-01"
+      },
+      "LogAnaWspName": {
+        "value": "law-uksouth-test-01"
+      }
+    }
+  }
