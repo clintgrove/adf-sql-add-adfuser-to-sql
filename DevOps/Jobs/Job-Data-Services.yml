@@ -26,8 +26,8 @@ jobs:
         - ${{ if eq(parameters.FeatureFlag_SQL_Deploy, true) }}:
           - download: current
             artifact: 'dropDacpacDATransactions' #  Lida dacpac
-          - download: current
-            artifact: 'dropDacpacFACSOURCE' #  facSource dacpac
+          #- download: current
+          #  artifact: 'dropDacpacFACSOURCE' #  facSource dacpac
         - download: current
           artifact: 'ArmTemplates' 
 
