@@ -20,18 +20,16 @@ variables:
  
   # DATransactions vars
   SQLBuildSourceFolder_dbLida: "SQL DBs/DatabaseLIDA"
-  AzureSqlServerDADbAddress: ${{ lower(variables.AzureSqlServerName_23) }}.database.windows.net #comes from the variable above
   DADatabaseName: "DATransactions"
 
   # dafac source database vars
   SQLBuildSourceFolder_dbfacStuffSource: "SQL DBs/dafacstuffuks"
-  AzureSqlServerDbAddress_facstuff_source: ${{ lower(variables.AzureSqlServerName_23) }}.database.windows.net #comes from the variable above
   DatabaseName_facstuff_source: "dba-fac-stf-source"
 
   # dafac target database vars
   SQLBuildSourceFolder_dbfacStuffTarget: "SQL DBs/dafacstuffuks-target"
-  AzureSqlServerDbAddress_facstuff_target: ${{ lower(variables.AzureSqlServerName_23) }}.database.windows.net #comes from the variable above
   DatabaseName_facstuff_target: "dba-facstuff-target"
 
   # Sql server variable for server ghubvse
   AzureSqlServerName_ghub: "sqlsrv-dwlxwvlfrsgym-${{ lower(variables.Environment) }}.database.windows.net" 
+  AzureSqlServerShortName_ghub: "sqlsrv-dwlxwvlfrsgym-${{ lower(variables.Environment) }}"
