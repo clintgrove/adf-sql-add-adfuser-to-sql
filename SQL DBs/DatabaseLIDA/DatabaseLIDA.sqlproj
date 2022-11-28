@@ -66,8 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="DataFactoryName">
-      <DefaultValue>
-      </DefaultValue>
+      <DefaultValue>ghubvse-test-uks-adf-01</DefaultValue>
       <Value>$(SqlCmdVar__1)</Value>
     </SqlCmdVariable>
   </ItemGroup>
