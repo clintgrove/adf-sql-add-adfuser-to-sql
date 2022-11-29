@@ -9,5 +9,12 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-CREATE USER [$(DataFactoryName)] FROM EXTERNAL PROVIDER;
-exec sp_addrolemember  'db_owner', [$(DataFactoryName)]
+--exec sp_addrolemember  'db_owner', [$(DataFactoryName)]
+
+IF NOT EXISTS (SELECT TOP 1 name from DATransactions.sys.database_principals 
+				WHERE type_desc = 'EXTERNAL_USER' and name = '$(DataFactoryName)')
+BEGIN
+	CREATE USER [$(DataFactoryName)] FROM EXTERNAL PROVIDER;
+END
+
+GRANT CONTROL ON DATABASE::DATransactions TO [$(DataFactoryName)];
