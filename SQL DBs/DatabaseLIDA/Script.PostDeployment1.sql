@@ -10,4 +10,4 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 CREATE USER [$(DataFactoryName)] FROM EXTERNAL PROVIDER;
-exec sp_addrolemember [$(DataFactoryName)], 'db_owner'
+exec sp_addrolemember  'db_owner', [$(DataFactoryName)]
