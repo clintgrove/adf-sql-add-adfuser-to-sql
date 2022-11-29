@@ -45,7 +45,7 @@ jobs:
               AdditionalArguments: /p:BlockOnPossibleDataLoss=${{ lower(parameters.FeatureFlag_SQL_StopIfDataLossCanOccur) }}
               ServerName: ${{ variables.AzureSqlServerName_ghub }}
               ServerShortName: ${{ variables.AzureSqlServerShortName_ghub }}
-              RGroup: ${variables.ResourceGroupNameGHUB}
+              RGroup: ${{variables.ResourceGroupNameGHUB}}
 #                    "defaultValue": "[concat('sqlsrv-',uniqueString('sqlsrv-',resourceGroup().location,'-', resourceGroup().id),'-test')]",
 
               ServiceConnection: ${{ parameters.ServiceConnection }}

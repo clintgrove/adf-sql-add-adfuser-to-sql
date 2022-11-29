@@ -27,7 +27,7 @@ steps:
         script: FilePath
         azureSubscription: '$(ServiceConnection)'
         ScriptPath: '$(Pipeline.Workspace)/scripts/SetAzureFirewallRule.ps1'
-        ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${parameters.RGroup}'
+        ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
         azurePowerShellVersion: LatestVersion
 
     - task: 'SqlAzureDacpacDeployment@1'
