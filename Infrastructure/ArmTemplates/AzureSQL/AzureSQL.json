@@ -109,9 +109,9 @@
       "resources": [
                 {
                     "type": "Microsoft.Sql/servers/administrators",
-                    //"name": "ActiveDirectory",
+                    "name": "ActiveDirectory",
                     "apiVersion": "2022-02-01-preview",
-                    //"location": "[parameters('location')]",
+                    "location": "[parameters('location')]",
                     "dependsOn": [
                         "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
                     ],
