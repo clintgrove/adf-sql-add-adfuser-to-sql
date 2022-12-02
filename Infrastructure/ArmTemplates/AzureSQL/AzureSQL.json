@@ -81,7 +81,7 @@
     },
     "AAD Admin ObjectID": {
       "type": "string",
-      "defaultValue": "Microsoft.Sql/servers/administrators"
+      "defaultValue": "434c25cb-ebd5-4a05-9af4-f48190219027"
     },
     "AAD TenantID": {
       "type": "string",
