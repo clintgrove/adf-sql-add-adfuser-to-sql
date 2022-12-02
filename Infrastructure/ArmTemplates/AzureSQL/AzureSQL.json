@@ -107,6 +107,20 @@
       },
       "resources": [
         {
+          "type": "Microsoft.Sql/servers/administrators",
+          "name": "[concat(parameters('sqlServerName'),'/ActiveDirectory')]",
+          "apiVersion": "2022-02-01-preview",
+          "dependsOn": [
+            "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
+          ],
+          "properties": {
+            "administratorType": "ActiveDirectory",
+            "login": "[parameters('AAD Admin Login')]",
+            "sid": "[parameters('AAD Admin ObjectID')]",
+            "tenantId": "[parameters('AAD TenantID')]"
+          }
+        },
+        {
           "type": "databases",
           "apiVersion": "2017-03-01-preview",
           "location": "[parameters('location')]",
@@ -174,20 +188,6 @@
           }
         }
       ]
-    },
-    {
-      "type": "Microsoft.Sql/servers/administrators",
-      "name": "[concat(parameters('sqlServerName'),'/ActiveDirectory')]",
-      "apiVersion": "2022-02-01-preview",
-      "dependsOn": [
-        "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
-      ],
-      "properties": {
-        "administratorType": "ActiveDirectory",
-        "login": "[parameters('AAD Admin Login')]",
-        "sid": "[parameters('AAD Admin ObjectID')]",
-        "tenantId": "[parameters('AAD TenantID')]"
-      }
     },
     {
       "type": "Microsoft.Sql/servers/databases",
