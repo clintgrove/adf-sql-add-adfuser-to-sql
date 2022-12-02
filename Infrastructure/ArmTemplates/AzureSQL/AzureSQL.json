@@ -74,6 +74,20 @@
     "SubscriptionID":{
       "type": "string",
       "defaultValue":"1943f6e4-c483-433c-a82b-cc02e45ad73c"
+    },
+    "AAD Admin Login":{
+      "type": "string",
+      "defaultValue": "SQLadmins"
+    }
+    ,
+    "AAD Admin ObjectID":{
+      "type": "string",
+       "defaultValue": "Microsoft.Sql/servers/administrators"
+    }
+    ,
+    "AAD TenantID":{
+      "type": "string",
+       "defaultValue": "89397abe-df61-48a3-abe3-efc403bca4bd"
     }
   },
   "variables":{
@@ -93,6 +107,22 @@
         "type": "SystemAssigned"
       },
       "resources": [
+                {
+                    "type": "administrators",
+                    "name": "activeDirectory",
+                    "apiVersion": "2022-02-01-preview",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                        "administratorType": "ActiveDirectory",
+                        "login": "[parameters('AAD Admin Login')]",
+                        "sid": "[parameters('AAD Admin ObjectID')]",
+                        "tenantId": "[parameters('AAD TenantID')]"
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
+                    ]
+                },
+            
                 {
                     "type": "databases",
                     "apiVersion": "2017-03-01-preview",
