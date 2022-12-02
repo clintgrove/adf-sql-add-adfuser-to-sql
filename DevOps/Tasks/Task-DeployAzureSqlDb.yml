@@ -34,10 +34,10 @@ steps:
       displayName: 'Deploy SQL Database - ${{ parameters.DatabaseName }}'
       inputs:
         azureSubscription: ${{ parameters.ServiceConnection }}
-        #ServerName: ${{parameters.ServerName}}
-        #DatabaseName: ${{ parameters.DatabaseName }}
-        #SqlUsername: 'sqladmin'
-        #SqlPassword: $(SqlPassword)
+        ServerName: ${{parameters.ServerName}}
+        DatabaseName: ${{ parameters.DatabaseName }}
+        SqlUsername: 'sqladmin'
+        SqlPassword: $(SqlPassword)
         #AuthenticationType: 'connectionString'
         #ConnectionString: 'Data Source=${{ parameters.ServerName }};Initial Catalog=${{ parameters.DatabaseName }};Encrypt=true;Connect Timeout=300'
         deployType: 'DacpacTask'
