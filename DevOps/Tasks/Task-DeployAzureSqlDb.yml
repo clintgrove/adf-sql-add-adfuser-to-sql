@@ -9,17 +9,17 @@ parameters:
 
 steps:
 
-    # - task: AzurePowerShell@5
-    #   displayName: Capture access token for SQL DB from Azure DevOps Service Connection
-    #   inputs:
-    #     azureSubscription: ${{ parameters.ServiceConnection }}
-    #     ScriptType: 'InlineScript'
-    #     azurePowerShellVersion: LatestVersion
-    #     Inline: |
-    #       $context = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile.DefaultContext
-    #       $sqlToken = [Microsoft.Azure.Commands.Common.Authentication.AzureSession]::Instance.AuthenticationFactory.Authenticate($context.Account, $context.Environment, $context.Tenant.Id.ToString(), $null, [Microsoft.Azure.Commands.Common.Authentication.ShowDialog]::Never, $null, "https://database.windows.net").AccessToken
-    #       Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
-    #     errorActionPreference: Continue
+    - task: AzurePowerShell@5
+      displayName: Capture access token for SQL DB from Azure DevOps Service Connection
+      inputs:
+        azureSubscription: ${{ parameters.ServiceConnection }}
+        ScriptType: 'InlineScript'
+        azurePowerShellVersion: LatestVersion
+        Inline: |
+          $context = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile.DefaultContext
+          $sqlToken = [Microsoft.Azure.Commands.Common.Authentication.AzureSession]::Instance.AuthenticationFactory.Authenticate($context.Account, $context.Environment, $context.Tenant.Id.ToString(), $null, [Microsoft.Azure.Commands.Common.Authentication.ShowDialog]::Never, $null, "https://database.windows.net").AccessToken
+          Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
+        errorActionPreference: Continue
   
     # - task: AzurePowerShell@5
     #   displayName: PS add firewall rule 
@@ -34,18 +34,18 @@ steps:
       displayName: 'Deploy SQL Database - ${{ parameters.DatabaseName }}'
       inputs:
         azureSubscription: ${{ parameters.ServiceConnection }}
-        ServerName: ${{parameters.ServerName}}
-        DatabaseName: ${{ parameters.DatabaseName }}
-        SqlUsername: 'sqladmin'
-        SqlPassword: $(SqlPassword)
-        #AuthenticationType: 'connectionString'
-        #ConnectionString: 'Data Source=${{ parameters.ServerName }};Initial Catalog=${{ parameters.DatabaseName }};Encrypt=true;Connect Timeout=300'
+        #ServerName: ${{parameters.ServerName}}
+        #DatabaseName: ${{ parameters.DatabaseName }}
+        #SqlUsername: 'sqladmin'
+        #SqlPassword: $(SqlPassword)
+        AuthenticationType: 'connectionString'
+        ConnectionString: 'Data Source=${{ parameters.ServerName }};Initial Catalog=${{ parameters.DatabaseName }};Encrypt=true;Connect Timeout=300'
         deployType: 'DacpacTask'
         DeploymentAction: 'Publish'
         DacpacFile: '${{ parameters.DacpacFilePath }}'
         IpDetectionMethod: 'AutoDetect'
-        #additionalArguments: ${{ parameters.AdditionalArguments }} /AccessToken:$(sqlToken) /v:DataFactoryName="ghubvse-test-uks-adf-01"
-        additionalArguments: ${{ parameters.AdditionalArguments }} /v:DataFactoryName="ghubvse-test-uks-adf-01"
+        additionalArguments: ${{ parameters.AdditionalArguments }} /AccessToken:$(sqlToken) /v:DataFactoryName="ghubvse-test-uks-adf-01"
+        #additionalArguments: ${{ parameters.AdditionalArguments }} /v:DataFactoryName="ghubvse-test-uks-adf-01"
     
     # - task: AzurePowerShell@5
     #   displayName: Remove firewall rule

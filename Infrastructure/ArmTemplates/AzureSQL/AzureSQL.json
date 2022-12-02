@@ -10,15 +10,15 @@
       }
     },
     "databases": {
-            "type": "array",
-            "defaultValue": [
-                {
-                    "name": "CGMetadataTelemetery"
-                }
-            ],
-            "metadata": {
-                "description": "The names of the databases to create."
-            }
+      "type": "array",
+      "defaultValue": [
+        {
+          "name": "CGMetadataTelemetery"
+        }
+      ],
+      "metadata": {
+        "description": "The names of the databases to create."
+      }
     },
     "location": {
       "type": "string",
@@ -40,58 +40,56 @@
       }
     },
     "redundancyBackup": {
-            "type": "string",
-            "defaultValue": "Local",
-            "metadata": {
-                "description": "Will the backup for this DB be geo or local or zrs"
-            }
-    },    
+      "type": "string",
+      "defaultValue": "Local",
+      "metadata": {
+        "description": "Will the backup for this DB be geo or local or zrs"
+      }
+    },
     "LogAnalyticsResourceGroup": {
-        "type": "string",
-        "defaultValue": "rg-log-eastus"
+      "type": "string",
+      "defaultValue": "rg-log-eastus"
     },
     "LogAnaWspName": {
-        "type": "string",
-        "defaultValue": "DefaultWorkspace-1943f6e4-c483-433c-a82b-cc02e45ad73c-CUS",
-        "metadata": {
-            "description": "Log Analytics workspace name"
-        }
+      "type": "string",
+      "defaultValue": "DefaultWorkspace-1943f6e4-c483-433c-a82b-cc02e45ad73c-CUS",
+      "metadata": {
+        "description": "Log Analytics workspace name"
+      }
     },
     "isMSDevOpsAuditEnabled": {
-        "type": "bool",
-        "defaultValue": false,
-        "metadata": {
-            "description": "Enable Auditing of Microsoft support operations (DevOps)"
-        }
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable Auditing of Microsoft support operations (DevOps)"
+      }
     },
-    "EnableDiagnostics":{
-        "type": "bool",
-        "defaultValue": true,
-        "metadata": {
-            "description": "This doesn't need setting for production as Azure policy does it for us"
-        }
+    "EnableDiagnostics": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "This doesn't need setting for production as Azure policy does it for us"
+      }
     },
-    "SubscriptionID":{
+    "SubscriptionID": {
       "type": "string",
-      "defaultValue":"1943f6e4-c483-433c-a82b-cc02e45ad73c"
+      "defaultValue": "1943f6e4-c483-433c-a82b-cc02e45ad73c"
     },
-    "AAD Admin Login":{
+    "AAD Admin Login": {
       "type": "string",
       "defaultValue": "SQLadmins"
-    }
-    ,
-    "AAD Admin ObjectID":{
+    },
+    "AAD Admin ObjectID": {
       "type": "string",
-       "defaultValue": "Microsoft.Sql/servers/administrators"
-    }
-    ,
-    "AAD TenantID":{
+      "defaultValue": "Microsoft.Sql/servers/administrators"
+    },
+    "AAD TenantID": {
       "type": "string",
-       "defaultValue": "89397abe-df61-48a3-abe3-efc403bca4bd"
+      "defaultValue": "89397abe-df61-48a3-abe3-efc403bca4bd"
     }
   },
-  "variables":{
-            "diagnosticSettingsName": "SQLSecurityAuditEvents_randomNameHere"
+  "variables": {
+    "diagnosticSettingsName": "SQLSecurityAuditEvents_randomNameHere"
   },
   "resources": [
     {
@@ -103,93 +101,93 @@
         "administratorLogin": "[parameters('administratorLogin')]",
         "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
       },
+
       "identity": {
         "type": "SystemAssigned"
       },
       "resources": [
-                {
-                    "type": "Microsoft.Sql/servers/administrators",
-                    "name": "[concat(parameters('sqlServerName'),'/ActiveDirectory')]",
-                    "apiVersion": "2022-02-01-preview",
-                    "dependsOn": [
-                        "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
-                    ],
-                    "properties": {
-                        "administratorType": "ActiveDirectory",
-                        "login": "[parameters('AAD Admin Login')]",
-                        "sid": "[parameters('AAD Admin ObjectID')]",
-                        "tenantId": "[parameters('AAD TenantID')]"
-                    }
-                },
-            
-                {
-                    "type": "databases",
-                    "apiVersion": "2017-03-01-preview",
-                    "location": "[parameters('location')]",
-                    "dependsOn": [
-                        "[parameters('sqlServerName')]"
-                    ],
-                    "name": "master",
-                    "properties": {}
-                },
-                {
-                    
-                    "condition": "[parameters('EnableDiagnostics')]",
-                    "type": "databases/providers/diagnosticSettings",
-                    "name": "[concat('master/microsoft.insights/',variables('diagnosticSettingsName'))]",
-                    "dependsOn": [
-                        "[parameters('sqlServerName')]",
-                        "[resourceId('Microsoft.Sql/servers/databases', parameters('sqlServerName'), 'master')]"
-                    ],
-                    "apiVersion": "2017-05-01-preview",
-                    "properties": {
-                        "name": "[variables('diagnosticSettingsName')]",
-                        "workspaceId": "[resourceId(parameters('SubscriptionID'), parameters('LogAnalyticsResourceGroup'), 'Microsoft.OperationalInsights/workspaces',parameters('LogAnaWspName'))]",
-                        "logs": [
-                            {
-                                "category": "SQLSecurityAuditEvents",
-                                "enabled": true,
-                                "retentionPolicy": {
-                                    "days": 0,
-                                    "enabled": false
-                                }
-                            },
-                            {
-                                "condition": "[parameters('isMSDevOpsAuditEnabled')]",
-                                "category": "DevOpsOperationsAudit",
-                                "enabled": true,
-                                "retentionPolicy": {
-                                    "days": 0,
-                                    "enabled": false
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
-                    "apiVersion": "2017-03-01-preview",
-                    "type": "auditingSettings",
-                    "name": "DefaultAuditingSettings",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
-                    ],
-                    "properties": {
-                        "State": "Enabled",
-                        "isAzureMonitorTargetEnabled": true
-                    }
-                },
-                {
-                    "condition": "[parameters('isMSDevOpsAuditEnabled')]",
-                    "type": "devOpsAuditingSettings",
-                    "apiVersion": "2020-08-01-preview",
-                    "name": "Default",
-                    "dependsOn": [ "[parameters('sqlServerName')]" ],
-                    "properties": {
-                        "State": "Enabled",
-                        "isAzureMonitorTargetEnabled": true
-                    }
+        {
+          "type": "databases",
+          "apiVersion": "2017-03-01-preview",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[parameters('sqlServerName')]"
+          ],
+          "name": "master",
+          "properties": {}
+        },
+        {
+
+          "condition": "[parameters('EnableDiagnostics')]",
+          "type": "databases/providers/diagnosticSettings",
+          "name": "[concat('master/microsoft.insights/',variables('diagnosticSettingsName'))]",
+          "dependsOn": [
+            "[parameters('sqlServerName')]",
+            "[resourceId('Microsoft.Sql/servers/databases', parameters('sqlServerName'), 'master')]"
+          ],
+          "apiVersion": "2017-05-01-preview",
+          "properties": {
+            "name": "[variables('diagnosticSettingsName')]",
+            "workspaceId": "[resourceId(parameters('SubscriptionID'), parameters('LogAnalyticsResourceGroup'), 'Microsoft.OperationalInsights/workspaces',parameters('LogAnaWspName'))]",
+            "logs": [
+              {
+                "category": "SQLSecurityAuditEvents",
+                "enabled": true,
+                "retentionPolicy": {
+                  "days": 0,
+                  "enabled": false
                 }
+              },
+              {
+                "condition": "[parameters('isMSDevOpsAuditEnabled')]",
+                "category": "DevOpsOperationsAudit",
+                "enabled": true,
+                "retentionPolicy": {
+                  "days": 0,
+                  "enabled": false
+                }
+              }
             ]
+          }
+        },
+        {
+          "apiVersion": "2017-03-01-preview",
+          "type": "auditingSettings",
+          "name": "DefaultAuditingSettings",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
+          ],
+          "properties": {
+            "State": "Enabled",
+            "isAzureMonitorTargetEnabled": true
+          }
+        },
+        {
+          "condition": "[parameters('isMSDevOpsAuditEnabled')]",
+          "type": "devOpsAuditingSettings",
+          "apiVersion": "2020-08-01-preview",
+          "name": "Default",
+          "dependsOn": [ "[parameters('sqlServerName')]" ],
+          "properties": {
+            "State": "Enabled",
+            "isAzureMonitorTargetEnabled": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers/administrators",
+      "name": "[concat(parameters('sqlServerName'),'/ActiveDirectory')]",
+      "apiVersion": "2022-02-01-preview",
+      "dependsOn": [
+        "[concat('Microsoft.Sql/servers/', parameters('sqlServerName'))]"
+      ],
+      "properties": {
+        "administratorType": "ActiveDirectory",
+        "login": "[parameters('AAD Admin Login')]",
+        "sid": "[parameters('AAD Admin ObjectID')]",
+        "tenantId": "[parameters('AAD TenantID')]"
+      }
     },
     {
       "type": "Microsoft.Sql/servers/databases",
@@ -198,21 +196,21 @@
       "name": "[concat(parameters('sqlServerName'), '/', parameters('databases')[copyIndex()].name)]",
       "location": "[parameters('location')]",
       "copy": {
-          "name": "databaseLoop",
-          "count": "[length(parameters('databases'))]"
+        "name": "databaseLoop",
+        "count": "[length(parameters('databases'))]"
       },
       "sku": {
         "name": "Standard",
         "tier": "Standard"
       },
       "properties": {
-                "collation": "SQL_Latin1_General_CP1_CI_AS",
-                "maxSizeBytes": 2147483648,
-                "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
-                "zoneRedundant": false,
-                "readScale": "Disabled",
-                "requestedBackupStorageRedundancy": "[parameters('redundancyBackup')]",
-                "isLedgerOn": false
+        "collation": "SQL_Latin1_General_CP1_CI_AS",
+        "maxSizeBytes": 2147483648,
+        "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+        "zoneRedundant": false,
+        "readScale": "Disabled",
+        "requestedBackupStorageRedundancy": "[parameters('redundancyBackup')]",
+        "isLedgerOn": false
       },
       "dependsOn": [
         "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
