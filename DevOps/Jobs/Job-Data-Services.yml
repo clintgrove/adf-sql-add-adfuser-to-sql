@@ -80,7 +80,7 @@ jobs:
 
             #Deploy Data Factory 01 pipelines
           - script: echo template file ouput write is -- '$(Pipeline.Workspace)/AdfArmTemplatesData01/ARMTemplateForFactory.json'            
-          - script: echo param file ouput write is -- '$(Agent.BuildDirectory)/${{ variables.AzureDataFactoryPipelinesArmTemplateParametersDataAdf01 }}'
+          - script: echo param file ouput write is -- '$(Agent.BuildDirectory)/${{ variables.AzureDataFactoryPipelinesArmTemplateParametersGHUBAdf01 }}'
           - template: ../Tasks/Task-ArmTemplateDeployment.yml
             parameters:
               ServiceConnection: ${{ parameters.ServiceConnection }}
@@ -88,7 +88,7 @@ jobs:
               ResourceGroupName: ${{ variables.ResourceGroupNameGHUB }}
               Location: ${{ parameters.Location }}
               TemplateFilePath: '$(Pipeline.Workspace)/AdfArmTemplatesData01/ARMTemplateForFactory.json' # From downloaded artifact
-              TemplateParamFilePath: '$(Agent.BuildDirectory)/${{ variables.AzureDataFactoryPipelinesArmTemplateParametersDataAdf01 }}' # From environment specific variables
+              TemplateParamFilePath: '$(Agent.BuildDirectory)/${{ variables.AzureDataFactoryPipelinesArmTemplateParametersGHUBAdf01 }}' # From environment specific variables
               ServiceReleased: "Azure Data Factory 01 Pipelines"
               doSql: false
 
