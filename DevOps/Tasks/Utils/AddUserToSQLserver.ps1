@@ -1,13 +1,13 @@
 param (
     [String] $db_server = "sqlsrv-dwlxwvlfrsgym-test.database.windows.net",
     [String] $db_name = "DATransactions",
-    [String] $data_factory_name = "ghubvse-test-uks-adf-01",
-    [String] $sqlT 
+    [String] $data_factory_name = "ghubvse-test-uks-adf-01"
+   # [String] $sqlT 
 )
 
-# $context = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile.DefaultContext
-# $sqlToken = [Microsoft.Azure.Commands.Common.Authentication.AzureSession]::Instance.AuthenticationFactory.Authenticate($context.Account, $context.Environment, $context.Tenant.Id.ToString(), $null, [Microsoft.Azure.Commands.Common.Authentication.ShowDialog]::Never, $null, "https://database.windows.net").AccessToken
-# Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
+$context = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile.DefaultContext
+$sqlToken = [Microsoft.Azure.Commands.Common.Authentication.AzureSession]::Instance.AuthenticationFactory.Authenticate($context.Account, $context.Environment, $context.Tenant.Id.ToString(), $null, [Microsoft.Azure.Commands.Common.Authentication.ShowDialog]::Never, $null, "https://database.windows.net").AccessToken
+Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
 
 # Write-Verbose "Get SID"
 # $aadGroupObjectId='9bfd16c9-a3aa-4f1a-a06f-a364fe8a025d'

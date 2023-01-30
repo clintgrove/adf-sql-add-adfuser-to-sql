@@ -53,7 +53,7 @@ steps:
         script: FilePath
         azureSubscription: '$(ServiceConnection)'
         ScriptPath: '$(Pipeline.Workspace)/scripts/AddUserToSQLserver.ps1'
-        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name "DATransactions" -data_factory_name "ghubvse-test-uks-adf-01" -sqlT $(sqlToken)
+        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name "DATransactions" -data_factory_name "ghubvse-test-uks-adf-01" 
         azurePowerShellVersion: LatestVersion
 
     
