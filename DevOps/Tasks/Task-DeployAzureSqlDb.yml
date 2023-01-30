@@ -46,6 +46,16 @@ steps:
         IpDetectionMethod: 'AutoDetect'
         additionalArguments: ${{ parameters.AdditionalArguments }} /AccessToken:$(sqlToken) /v:DataFactoryName="ghubvse-test-uks-adf-01"
         #additionalArguments: ${{ parameters.AdditionalArguments }} /v:DataFactoryName="ghubvse-test-uks-adf-01"
+
+    - task: AzurePowerShell@5
+      displayName: add adf managed identity user to sql server
+      inputs:
+        script: FilePath
+        azureSubscription: '$(ServiceConnection)'
+        ScriptPath: '$(Pipeline.Workspace)/scripts/AddUserToSQLserver.ps1'
+        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name "DATransactions" -data_factory_name "ghubvse-test-uks-adf-01" -sqlT $(sqlToken)
+        azurePowerShellVersion: LatestVersion
+
     
     - task: AzurePowerShell@5
       displayName: Remove firewall rule
