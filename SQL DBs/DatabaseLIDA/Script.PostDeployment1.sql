@@ -10,11 +10,11 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 --exec sp_addrolemember  'db_owner', [$(DataFactoryName)]
+Select 1;
+--IF NOT EXISTS (SELECT TOP 1 name from DATransactions.sys.database_principals 
+--				WHERE type_desc = 'EXTERNAL_USER' and name = '$(DataFactoryName)')
+--BEGIN
+--	CREATE USER [$(DataFactoryName)] FROM EXTERNAL PROVIDER;
+--END
 
-IF NOT EXISTS (SELECT TOP 1 name from DATransactions.sys.database_principals 
-				WHERE type_desc = 'EXTERNAL_USER' and name = '$(DataFactoryName)')
-BEGIN
-	CREATE USER [$(DataFactoryName)] FROM EXTERNAL PROVIDER;
-END
-
-GRANT CONTROL ON DATABASE::DATransactions TO [$(DataFactoryName)];
+--GRANT CONTROL ON DATABASE::DATransactions TO [$(DataFactoryName)];
