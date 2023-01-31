@@ -12,7 +12,7 @@ WRITE-HOST $aadGroupObjectId
 
 $context = [Microsoft.Azure.Commands.Common.Authentication.Abstractions.AzureRmProfileProvider]::Instance.Profile.DefaultContext
 $sqlToken = [Microsoft.Azure.Commands.Common.Authentication.AzureSession]::Instance.AuthenticationFactory.Authenticate($context.Account, $context.Environment, $context.Tenant.Id.ToString(), $null, [Microsoft.Azure.Commands.Common.Authentication.ShowDialog]::Never, $null, "https://database.windows.net").AccessToken
-Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
+#Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
 
 Write-Verbose "Get SID"
 $objId=$aadGroupObjectId.Trim('"')
