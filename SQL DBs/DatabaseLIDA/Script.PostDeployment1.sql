@@ -10,16 +10,16 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-IF NOT EXISTS (SELECT [name]
- FROM [sys].[database_principals]
- WHERE [name] = N'$(aadGroupName)')
-BEGIN
- CREATE USER [$(aadGroupName)] WITH DEFAULT_SCHEMA=[dbo];
- ALTER ROLE db_datawriter ADD MEMBER [$(aadGroupName)];
-END
+--IF NOT EXISTS (SELECT [name]
+-- FROM [sys].[database_principals]
+-- WHERE [name] = N'$(aadGroupName)')
+--BEGIN
+-- CREATE USER [$(aadGroupName)] WITH DEFAULT_SCHEMA=[dbo];
+-- ALTER ROLE db_datawriter ADD MEMBER [$(aadGroupName)];
+--END
 
 --exec sp_addrolemember  'db_owner', [$(DataFactoryName)]
---Select 1;
+Select 1;
 --IF NOT EXISTS (SELECT TOP 1 name from DATransactions.sys.database_principals 
 --				WHERE type_desc = 'EXTERNAL_USER' and name = '$(DataFactoryName)')
 --BEGIN

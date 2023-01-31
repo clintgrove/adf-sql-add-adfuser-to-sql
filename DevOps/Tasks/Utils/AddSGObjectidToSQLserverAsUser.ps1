@@ -1,5 +1,5 @@
 param (
-  [String]  $aadGroupName = 'SQLReaderWriterDev',
+  [String] $aadGroupName = 'SQLDataWriters',
   [String] $dbRoleName = 'db_datawriter',
   [String] $db_server = 'sqlsrv-dwlxwvlfrsgym-test.database.windows.net',
   [String] $db_name = 'DATransactions'
