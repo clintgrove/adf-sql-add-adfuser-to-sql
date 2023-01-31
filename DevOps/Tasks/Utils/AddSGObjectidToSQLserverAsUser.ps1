@@ -6,7 +6,7 @@ param (
 )
 # idea from https://medium.com/microsoftazure/deploying-a-dacpac-to-azure-with-azure-pipelines-and-managed-identity-89703d405e00
 
-$aadGroupObjectId = az ad group show --group $aadGroupName --query objectId
+$aadGroupObjectId = (Get-AzADGroup -DisplayName $aadGroupName).id #az ad group show --group $aadGroupName --query objectId
 
 WRITE-HOST $aadGroupObjectId
 

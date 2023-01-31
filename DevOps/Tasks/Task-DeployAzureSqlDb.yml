@@ -21,14 +21,14 @@ steps:
           Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
         errorActionPreference: Continue
   
-    - task: AzurePowerShell@5
-      displayName: PS add firewall rule 
-      inputs:
-        script: FilePath
-        azureSubscription: '$(ServiceConnection)'
-        ScriptPath: '$(Pipeline.Workspace)/scripts/SetAzureFirewallRule.ps1'
-        ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
-        azurePowerShellVersion: LatestVersion
+    # - task: AzurePowerShell@5
+    #   displayName: PS add firewall rule 
+    #   inputs:
+    #     script: FilePath
+    #     azureSubscription: '$(ServiceConnection)'
+    #     ScriptPath: '$(Pipeline.Workspace)/scripts/SetAzureFirewallRule.ps1'
+    #     ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
+    #     azurePowerShellVersion: LatestVersion
 
     - task: 'SqlAzureDacpacDeployment@1'
       displayName: 'Deploy SQL Database - ${{ parameters.DatabaseName }}'
@@ -57,11 +57,11 @@ steps:
         azurePowerShellVersion: LatestVersion
 
     
-    - task: AzurePowerShell@5
-      displayName: Remove firewall rule
-      inputs:
-        script: FilePath
-        azureSubscription: '$(ServiceConnection)'
-        ScriptPath: '$(Pipeline.Workspace)/scripts/RemoveAzureFirewallRule.ps1'
-        ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
-        azurePowerShellVersion: LatestVersion
+    # - task: AzurePowerShell@5
+    #   displayName: Remove firewall rule
+    #   inputs:
+    #     script: FilePath
+    #     azureSubscription: '$(ServiceConnection)'
+    #     ScriptPath: '$(Pipeline.Workspace)/scripts/RemoveAzureFirewallRule.ps1'
+    #     ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
+    #     azurePowerShellVersion: LatestVersion
