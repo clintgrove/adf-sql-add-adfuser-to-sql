@@ -44,7 +44,7 @@ steps:
         DeploymentAction: 'Publish'
         DacpacFile: '${{ parameters.DacpacFilePath }}'
         IpDetectionMethod: 'AutoDetect'
-        additionalArguments: ${{ parameters.AdditionalArguments }} /AccessToken:$(sqlToken) /v:DataFactoryName="ghubvse-test-uks-adf-01"
+        additionalArguments: ${{ parameters.AdditionalArguments }} /AccessToken:$(sqlToken) /v:DataFactoryName="ghubvse-test-uks-adf-01" /v:aadGroupName="SQLDataWriters"
         #additionalArguments: ${{ parameters.AdditionalArguments }} /v:DataFactoryName="ghubvse-test-uks-adf-01"
 
     # - task: AzurePowerShell@5
