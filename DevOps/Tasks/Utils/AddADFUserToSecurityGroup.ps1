@@ -1,6 +1,6 @@
 param (
-    [String] $AD_SecurityGroup = 'SQLDataWriters',
-    [String] $FactoryNameUpToEnv = 'ghubvse'
+    [String] $AD_SecurityGroup ,
+    [String] $FactoryNameUpToEnv 
 )
 
 $idOfSecGroup = (Get-AzADGroup -DisplayName $AD_SecurityGroup).id
