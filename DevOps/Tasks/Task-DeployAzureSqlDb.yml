@@ -6,6 +6,9 @@ parameters:
   ServerShortName: string
   ServiceConnection: string
   RGroup: string
+  DataFactoryNameGHUB: string
+  AADSecurityGroup: string
+
 
 steps:
 
@@ -53,7 +56,7 @@ steps:
         script: FilePath
         azureSubscription: '$(ServiceConnection)'
         ScriptPath: '$(Pipeline.Workspace)/scripts/AddADFUserToSecurityGroup.ps1'
-        ScriptArguments: -AD_SecurityGroup ${{ variables.AADSecurityGroup }} -FactoryNameUpToEnv ${{ variables.DataFactoryNameGHUB }}
+        ScriptArguments: -AD_SecurityGroup ${{ parameters.AADSecurityGroup }} -FactoryNameUpToEnv ${{ parameters.DataFactoryNameGHUB }}
         azurePowerShellVersion: LatestVersion
 
     - task: AzurePowerShell@5
@@ -62,7 +65,7 @@ steps:
         script: FilePath
         azureSubscription: '$(ServiceConnection)'
         ScriptPath: '$(Pipeline.Workspace)/scripts/AddSGObjectidToSQLserverAsUser.ps1'
-        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name ${{parameters.DADatabaseName}} -aadGroupName ${{ variables.AADSecurityGroup }}
+        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name ${{parameters.DADatabaseName}} -aadGroupName ${{ parameters.AADSecurityGroup }}
         azurePowerShellVersion: LatestVersion
 
     
