@@ -8,6 +8,7 @@ variables:
   ResourceGroupNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
   DataFactoryNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-adf-01"
   AzureDataFactoryPipelinesArmTemplateParametersGHUBAdf01: "Services/DataAnalytics/ARMTemplateParametersForFactory01${{ variables.Environment }}.json" #this file doesn't exist for dev
+  AADSecurityGroup: "SQL-DataWriters-${{ upper(variables.Environment) }}"
 
   # Arm template parameter files
   AzureKeyVaultArmTemplateParametersData: "ArmTemplates/Keyvault/Parameters/${{ upper(variables.Environment) }}/AzureKeyVault.Data.parameters.json"

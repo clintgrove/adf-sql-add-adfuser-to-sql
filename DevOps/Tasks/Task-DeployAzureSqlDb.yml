@@ -21,14 +21,14 @@ steps:
           Write-Host ("##vso[task.setvariable variable=SQLTOKEN;]$sqlToken")  
         errorActionPreference: Continue
   
-    # - task: AzurePowerShell@5
-    #   displayName: PS add firewall rule 
-    #   inputs:
-    #     script: FilePath
-    #     azureSubscription: '$(ServiceConnection)'
-    #     ScriptPath: '$(Pipeline.Workspace)/scripts/SetAzureFirewallRule.ps1'
-    #     ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
-    #     azurePowerShellVersion: LatestVersion
+    - task: AzurePowerShell@5
+      displayName: PS add firewall rule 
+      inputs:
+        script: FilePath
+        azureSubscription: '$(ServiceConnection)'
+        ScriptPath: '$(Pipeline.Workspace)/scripts/SetAzureFirewallRule.ps1'
+        ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
+        azurePowerShellVersion: LatestVersion
 
     - task: 'SqlAzureDacpacDeployment@1'
       displayName: 'Deploy SQL Database - ${{ parameters.DatabaseName }}'
@@ -48,20 +48,29 @@ steps:
         #additionalArguments: ${{ parameters.AdditionalArguments }} /v:DataFactoryName="ghubvse-test-uks-adf-01"
 
     - task: AzurePowerShell@5
-      displayName: add adf managed identity user to sql server
+      displayName: add adf managed identity user to Security Group
+      inputs:
+        script: FilePath
+        azureSubscription: '$(ServiceConnection)'
+        ScriptPath: '$(Pipeline.Workspace)/scripts/AddADFUserToSecurityGroup.ps1'
+        ScriptArguments: -AD_SecurityGroup ${{ variables.AADSecurityGroup }} -FactoryNameUpToEnv ${{ variables.DataFactoryNameGHUB }}
+        azurePowerShellVersion: LatestVersion
+
+    - task: AzurePowerShell@5
+      displayName: add Security Group to sql server
       inputs:
         script: FilePath
         azureSubscription: '$(ServiceConnection)'
         ScriptPath: '$(Pipeline.Workspace)/scripts/AddSGObjectidToSQLserverAsUser.ps1'
-        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name "DATransactions" -aadGroupName "SQLDataWriters" 
+        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name ${{parameters.DADatabaseName}} -aadGroupName ${{ variables.AADSecurityGroup }}
         azurePowerShellVersion: LatestVersion
 
     
-    # - task: AzurePowerShell@5
-    #   displayName: Remove firewall rule
-    #   inputs:
-    #     script: FilePath
-    #     azureSubscription: '$(ServiceConnection)'
-    #     ScriptPath: '$(Pipeline.Workspace)/scripts/RemoveAzureFirewallRule.ps1'
-    #     ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
-    #     azurePowerShellVersion: LatestVersion
+    - task: AzurePowerShell@5
+      displayName: Remove firewall rule
+      inputs:
+        script: FilePath
+        azureSubscription: '$(ServiceConnection)'
+        ScriptPath: '$(Pipeline.Workspace)/scripts/RemoveAzureFirewallRule.ps1'
+        ScriptArguments: '-ServerName ${{ parameters.ServerShortName }} -ResourceGroupName ${{parameters.RGroup}}'
+        azurePowerShellVersion: LatestVersion
