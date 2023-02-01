@@ -50,6 +50,8 @@ steps:
         additionalArguments: ${{ parameters.AdditionalArguments }} /AccessToken:$(sqlToken) /v:DataFactoryName="ghubvse-test-uks-adf-01" /v:aadGroupName="SQLDataWriters"
         #additionalArguments: ${{ parameters.AdditionalArguments }} /v:DataFactoryName="ghubvse-test-uks-adf-01"
 
+    - script: echo This is the AAD Security group  ${{ parameters.AADSecurityGroup }} and adf is  ${{ parameters.DataFactoryNameGHUB }}
+
     - task: AzurePowerShell@5
       displayName: add adf managed identity user to Security Group
       inputs:
