@@ -1,13 +1,22 @@
 parameters:
-  DacpacFilePath: string
-  DatabaseName: string
-  AdditionalArguments: string
-  ServerName: string
-  ServerShortName: string
-  ServiceConnection: string
-  RGroup: string
-  DataFactoryNameGHUB: string
-  AADSecurityGroup: string
+  - name: DacpacFilePath
+    type: string
+  - name: DatabaseName
+    type: string
+  - name: AdditionalArguments
+    type: string
+  - name: ServerName
+    type: string
+  - name: ServerShortName
+    type: string
+  - name: ServiceConnection
+    type: string
+  - name: RGroup
+    type: string
+  - name: DataFactoryNameGHUB
+    type: string
+  - name: AADSecurityGroup
+    type: string
 
 
 steps:

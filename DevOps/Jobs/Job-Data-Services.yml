@@ -42,7 +42,7 @@ jobs:
             parameters:
               DacpacFilePath: '$(Pipeline.Workspace)/dropDacpacDATransactions/DatabaseLIDA.dacpac'
               DatabaseName: ${{ variables.DADatabaseName }}
-              AD_SecurityGroup: ${{ variables.AADSecurityGroup }}
+              AADSecurityGroup: ${{ variables.AADSecurityGroup }}
               DataFactoryNameGHUB: ${{ variables.DataFactoryNameGHUB }}
               AdditionalArguments: /p:BlockOnPossibleDataLoss=${{ lower(parameters.FeatureFlag_SQL_StopIfDataLossCanOccur) }}
               ServerName: ${{ variables.AzureSqlServerName_ghub }}
