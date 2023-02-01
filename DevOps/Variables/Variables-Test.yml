@@ -6,7 +6,7 @@ variables:
   # GHUB lz variables (this id 1943f6e4-c483-433c-a82b-cc02e45ad73c is my visual studio licence in my personal azure tenant)
   SubscriptionIdGHUB: "1943f6e4-c483-433c-a82b-cc02e45ad73c"
   ResourceGroupNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
-  DataFactoryNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-adf-01"
+  DataFactoryNameGHUB: "ghubvse-${{ lower(variables.Environment) }}-uks-adf-01"
   AzureDataFactoryPipelinesArmTemplateParametersGHUBAdf01: "Services/DataAnalytics/ARMTemplateParametersForFactory01${{ variables.Environment }}.json" #this file doesn't exist for dev
   AADSecurityGroup: "SQL-DataWriters-${{ upper(variables.Environment) }}"
 
