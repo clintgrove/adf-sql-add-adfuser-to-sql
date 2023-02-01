@@ -76,7 +76,7 @@ steps:
         script: FilePath
         azureSubscription: '$(ServiceConnection)'
         ScriptPath: '$(Pipeline.Workspace)/scripts/AddSGObjectidToSQLserverAsUser.ps1'
-        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name ${{parameters.DADatabaseName}} -aadGroupName ${{ parameters.AADSecurityGroup }}
+        ScriptArguments: -db_server ${{ parameters.ServerName }} -db_name ${{parameters.DatabaseName}} -aadGroupName ${{ parameters.AADSecurityGroup }}
         azurePowerShellVersion: LatestVersion
 
     
