@@ -2,8 +2,8 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "sqlServerName": {
-      "value": "lz-cgr-ppe-uks-sqldb-23"
+    "sqlServerName":{
+      "value": "sqlsrv-ghub01-ppe"
     },
     "administratorLogin": {
       "value": "sqladmin"
@@ -16,15 +16,24 @@
     "databases": {
         "value": [
             {
-                "name": "DATransactions"
-            }
+                "name": "dba-fac-stf-source"
+            },
+            {
+              "name": "dba-facstuff-target"
+          },
+          {
+            "name": "DATransactions"
+        }
         ]
     },
     "LogAnalyticsResourceGroup": {
       "value": "lz-ghubvse-ppe-uks-rg-01"
     },
     "LogAnaWspName": {
-      "value": "law-ppe-eastus23"
+      "value": "law-uksouth-ppe-01"
+    },
+    "SubscriptionID":{
+      "value": "1943f6e4-c483-433c-a82b-cc02e45ad73c"
     }
   }
 }
