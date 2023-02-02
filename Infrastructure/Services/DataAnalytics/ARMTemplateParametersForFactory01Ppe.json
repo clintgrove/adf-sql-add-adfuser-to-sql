@@ -3,7 +3,7 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"factoryName": {
-			"value": "cgr-ppe-uks-adf-01"
+			"value": "ghubvse-ppe-uks-adf-01"
 		},
 		"facstuff_DatabaseSOURCE_properties_typeProperties_connectionString_secretName": {
 			"value": "sqlserver-facstuff-test-source-connectionstring"
