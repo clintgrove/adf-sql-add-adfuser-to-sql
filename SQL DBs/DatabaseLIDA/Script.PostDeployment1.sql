@@ -9,6 +9,20 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+BEGIN TRY 
+CREATE ROLE SynapseReadWriteToTables
+GRANT SELECT ON DATABASE::[$(DatabaseName)] to SynapseReadWriteToTables
+GRANT INSERT ON DATABASE::[$(DatabaseName)] to SynapseReadWriteToTables
+GRANT UPDATE ON DATABASE::[$(DatabaseName)] to SynapseReadWriteToTables
+GRANT DELETE ON DATABASE::[$(DatabaseName)] to SynapseReadWriteToTables
+GRANT CREATE TABLE TO SynapseReadWriteToTables
+GRANT CREATE VIEW TO SynapseReadWriteToTables
+GRANT ALTER ANY SCHEMA TO SynapseReadWriteToTables
+END TRY
+
+BEGIN CATCH
+SELECT 'ALREADY THERE'
+END CATCH
 
 --IF NOT EXISTS (SELECT [name]
 -- FROM [sys].[database_principals]
@@ -19,7 +33,7 @@ Post-Deployment Script Template
 --END
 
 --exec sp_addrolemember  'db_owner', [$(DataFactoryName)]
-Select 1;
+
 --IF NOT EXISTS (SELECT TOP 1 name from DATransactions.sys.database_principals 
 --				WHERE type_desc = 'EXTERNAL_USER' and name = '$(DataFactoryName)')
 --BEGIN

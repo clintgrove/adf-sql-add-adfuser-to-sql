@@ -1,7 +1,7 @@
 param (
   [String] $aadGroupName = 'SQLDataWriters',
-  [String] $dbRoleName = 'db_datawriter',
-  [String] $db_server = 'sqlsrv-dwlxwvlfrsgym-test.database.windows.net',
+  [String] $dbRoleName = 'SynapseReadWriteToTables',
+  [String] $db_server = 'sqlsrv-xxxx-test.database.windows.net',
   [String] $db_name = 'DATransactions'
 )
 # idea from https://medium.com/microsoftazure/deploying-a-dacpac-to-azure-with-azure-pipelines-and-managed-identity-89703d405e00
