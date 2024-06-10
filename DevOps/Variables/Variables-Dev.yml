@@ -7,6 +7,7 @@ variables:
   ResourceGroupNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
   #ResourceGroupNameIntSharedPlatform: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
   AutomationAccountName : "lz-ghubvse-${{ lower(variables.Environment) }}-uks-automationacc-01"
+  AzureLogAnalyticsParameters: "ArmTemplates/LogAnalytics/Parameters/${{ upper(variables.Environment) }}/LogAnalytics.parameters.json"
 
   
 
