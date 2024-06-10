@@ -1,5 +1,6 @@
 variables:
   Environment: 'Dev' 
+  AdoEnvironment: 'dev-data'
 
   # Int shared platform lz variables
   SubscriptionIdInt: "1943f6e4-c483-433c-a82b-cc02e45ad73c"
