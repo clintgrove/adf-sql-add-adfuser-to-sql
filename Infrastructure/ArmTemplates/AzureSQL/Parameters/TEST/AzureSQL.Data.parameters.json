@@ -8,11 +8,6 @@
       "administratorLogin": {
         "value": "sqladmin"
       },
-      "administratorLoginPassword": {
-
-        "value": "$(SqlPassword)"
-
-      },
       "databases": {
           "value": [
               {
