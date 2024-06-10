@@ -11,6 +11,22 @@ variables:
   AzureDataFactoryParametersData: "ArmTemplates/DataFactory/Parameters/${{ upper(variables.Environment) }}/AzureDataFactory.parameters.json"
   AzureSqlServerParametersData: "ArmTemplates/AzureSQL/Parameters/${{ upper(variables.Environment) }}/AzureSQL.Data.parameters.json"
 
+  # DATransactions vars
+  SQLBuildSourceFolder_dbLida: "SQL DBs/DatabaseLIDA"
+  DADatabaseName: "DATransactions"
+
+  # dafac source database vars
+  SQLBuildSourceFolder_dbfacStuffSource: "SQL DBs/dafacstuffuks"
+  DatabaseName_facstuff_source: "dba-fac-stf-source"
+
+  # dafac target database vars
+  SQLBuildSourceFolder_dbfacStuffTarget: "SQL DBs/dafacstuffuks-target"
+  DatabaseName_facstuff_target: "dba-facstuff-target"
+
+  # Sql server variable for server ghubvse
+  AzureSqlServerName_ghub: "sqlsrv-ghub01-${{ lower(variables.Environment) }}.database.windows.net" 
+  AzureSqlServerShortName_ghub: "sqlsrv-ghub01-${{ lower(variables.Environment) }}"
+
 
   
 
