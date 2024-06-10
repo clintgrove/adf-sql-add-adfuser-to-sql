@@ -4,7 +4,8 @@ variables:
 
   # Int shared platform lz variables
   SubscriptionIdInt: "1943f6e4-c483-433c-a82b-cc02e45ad73c"
-  ResourceGroupNameIntSharedPlatform: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
+  ResourceGroupNameGHUB: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
+  #ResourceGroupNameIntSharedPlatform: "lz-ghubvse-${{ lower(variables.Environment) }}-uks-rg-01"
   AutomationAccountName : "lz-ghubvse-${{ lower(variables.Environment) }}-uks-automationacc-01"
 
   
