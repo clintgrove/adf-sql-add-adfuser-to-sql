@@ -9,6 +9,9 @@ variables:
   AutomationAccountName : "lz-ghubvse-${{ lower(variables.Environment) }}-uks-automationacc-01"
   AzureLogAnalyticsParameters: "ArmTemplates/LogAnalytics/Parameters/${{ upper(variables.Environment) }}/LogAnalytics.parameters.json"
 
+  AzureSqlServerParametersData: "ArmTemplates/AzureSQL/Parameters/${{ upper(variables.Environment) }}/AzureSQL.Data.parameters.json"
+
+
   
 
  
